@@ -47,61 +47,24 @@ export default function ActionMenu() {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button onClick={() => router.push('/products')}>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Producten en Diensten" />
-        </ListItem>
-        <Divider />
-        <ListItem button onClick={() => router.push('/messages')}>
-          <ListItemIcon>
-            <MessageIcon />
-          </ListItemIcon>
-          <ListItemText primary="Berichtenbox" />
-        </ListItem>
-
-        <ListItem button onClick={() => router.push('/tasks')}>
-          <ListItemIcon>
-            <PlaylistAddCheckIcon />
-          </ListItemIcon>
-          <ListItemText primary="Taken" />
-        </ListItem>
-
-        <ListItem button onClick={() => router.push('/cases')}>
-          <ListItemIcon>
-            <SubscriptionsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Lopende Zaken" />
-        </ListItem>
-
         <Divider />
         <ListItem button onClick={() => router.push('/data')}>
           <ListItemIcon>
             <AssignmentIndIcon />
           </ListItemIcon>
-          <ListItemText primary="Identiteit" />
+          <ListItemText primary="Aanmaken" />
         </ListItem>
-
-        <ListItem button onClick={() => router.push('/workAndIncome')}>
+        <ListItem button onClick={() => router.push('/tasks')}>
           <ListItemIcon>
-            <WorkIcon />
+            <PlaylistAddCheckIcon />
           </ListItemIcon>
-          <ListItemText primary="Werk en Inkomen" />
+          <ListItemText primary="Raportages" />
         </ListItem>
-
-        <ListItem button onClick={() => router.push('/livingAndTax')}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Wonen en Belasting" />
-        </ListItem>
-
         <ListItem button onClick={() => router.push('/vault')}>
           <ListItemIcon>
             <LockIcon />
           </ListItemIcon>
-          <ListItemText primary="Datakluis" />
+          <ListItemText primary="Akte kluis" />
         </ListItem>
 
       </List>
