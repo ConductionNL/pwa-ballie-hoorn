@@ -61,8 +61,8 @@ export default function Footer() {
       <Box
         px={{ xs: 3, sm: 10 }}
         py={{ xs: 5, sm: 10 }}
-        bgcolor="#A3B2B6"
-        color="white"
+        bgcolor="#E8E9EA"
+        color="#353b40"
         className={classes.sectionDesktop}
       >
         <Container maxWidth="lg">
