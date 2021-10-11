@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {alpha, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -29,7 +29,7 @@ import ActionMenu from "../../components/common/actionmenu";
 import PageHeader from "./pageheader";
 import Grid from "@material-ui/core/Grid";
 import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
-import {useGet} from "restful-react";
+import {useGet, useMutate} from "restful-react";
 import {useAppContext} from "../context/state";
 
 const useStyles = makeStyles((theme) => ({
@@ -115,6 +115,8 @@ const handleLogout = (context) => {
 
 export default function MainMenu() {
 
+  const [user, setUser] = useState();
+
   const router = useRouter()
   const classes = useStyles();
 
@@ -132,9 +134,36 @@ export default function MainMenu() {
     setState({...state, [anchor]: open});
   };
 
-  const loginUser = (status) => {
-    setState({...state, ['loggedIn']: status});
-  };
+  // const loginUser = (status) => {
+  //   setState({...state, ['loggedIn']: status});
+  // };
+
+  // const spoofLogin = () => {
+  //   setUser(true);
+  //   console.log(user);
+  // }
+  //
+  const spoofLogout = () => {
+    setUser(null);
+    console.log(user);
+  }
+
+  const {mutate: loginUser} = useMutate({
+    verb: "POST",
+    path: `/login`,
+  });
+
+  const handleLogin = () => {
+    const data = {
+      username: "iets",
+      password: "test123"
+    }
+
+    loginUser(data).then(() => {
+      // Set state
+      alert('yes')}
+    );
+  }
 
   let context = useAppContext();
 
@@ -184,13 +213,15 @@ export default function MainMenu() {
             <Box marginRight={2}>
               <Typography variant="h6" color="inherit">
                     {
-                      context.user !== null
+                      user !== null
                         ?
-                          <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>
+                          <span onClick={() => {spoofLogout}} style={{color: 'white'}}>Uitloggen</span>
                         :
-                          <Link href="http://localhost/login/adfs/conduction" >
-                            <span style={{color: 'white'}}>Inloggen</span>
-                          </Link>
+                          // Local disabled
+                          // <Link href="http://localhost/login/adfs/conduction" >
+                          //   <span style={{color: 'white'}}>Inloggen</span>
+                          // </Link>
+                            <span onClick={handleLogin} style={{color: 'white'}}>Inloggen</span>
                     }
               </Typography>
             </Box>
