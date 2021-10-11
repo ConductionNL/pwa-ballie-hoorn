@@ -2,13 +2,13 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import {useGet} from "restful-react";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
-import {PictureAsPdfOutlined, CropSquare} from "@material-ui/icons";
+import {PictureAsPdfOutlined, CropFree} from "@material-ui/icons";
 
 export default function SecuritiesTable({securities = null}) {
 
   if (securities == null) {
     var {data: securities} = useGet({
-      path: "/attributes"
+      path: "/securities"
     });
   }
 
@@ -28,14 +28,14 @@ export default function SecuritiesTable({securities = null}) {
       headerName: 'View', renderCell: (params: GridRenderCellParams) => (
         <strong>
           <Link style={{marginLeft: 20}}
-            href={"/attributes/" + params.value}
+            href={"/securities/" + params.value}
           >
             <PictureAsPdfOutlined />
           </Link>
           <Link style={{marginLeft: 20}}
-            href={"/attributes/" + params.value}
+            href={"/securities/" + params.value}
           >
-            <CropSquare />
+            <CropFree />
           </Link>
         </strong>
       ), flex: 1 }
