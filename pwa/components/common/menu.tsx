@@ -172,7 +172,33 @@ export default function MainMenu() {
       <AppBar position="static" className={classes.appbar}>
         <Container>
           <Toolbar>
-
+            <Box style={{marginRight: "25px"}}>
+              <Typography variant="h6" color="inherit">
+                <Link href="/residents">
+                  <span style={{color: 'white'}}>
+                    Ander persoon
+                  </span>
+                </Link>
+              </Typography>
+            </Box>
+            <Box style={{marginRight: "25px"}}>
+              <Typography variant="h6" color="inherit">
+                <Link href="/securities">
+                  <span style={{color: 'white'}}>
+                    Waardepapieren
+                  </span>
+                </Link>
+              </Typography>
+            </Box>
+            <Box style={{marginRight: "25px"}}>
+              <Typography variant="h6" color="inherit">
+                <Link href="/exports">
+                  <span style={{color: 'white'}}>
+                    Exports
+                  </span>
+                </Link>
+              </Typography>
+            </Box>
             {
             <div className={classes.sectionMobile}>
               <IconButton aria-label="show 17 new notifications" color="inherit"
