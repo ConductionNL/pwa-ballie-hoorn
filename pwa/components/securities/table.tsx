@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import {useGet} from "restful-react";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
-import { PictureAsPdfOutlined, CropSquare } from "@material-ui/icons";
+import {PictureAsPdfOutlined, CropSquare} from "@material-ui/icons";
 
 export default function SecuritiesTable({securities = null}) {
 
@@ -38,8 +38,7 @@ export default function SecuritiesTable({securities = null}) {
             <CropSquare />
           </Link>
         </strong>
-      ), flex: 1
-    }
+      ), flex: 1 }
   ];
 
 
