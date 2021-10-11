@@ -2,34 +2,40 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import {useGet} from "restful-react";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
+import { PictureAsPdfOutlined, CropSquare } from "@material-ui/icons";
 
-export default function ResidentTable({residents = null}) {
+export default function SecuritiesTable({securities = null}) {
 
-  if (residents == null) {
-    var {data: residents} = useGet({
+  if (securities == null) {
+    var {data: securities} = useGet({
       path: "/attributes"
     });
   }
 
   /* lets catch hydra */
-  if (residents != null && residents["results"] !== undefined) {
-    residents = residents["results"];
+  if (securities != null && securities["results"] !== undefined) {
+    securities = securities["results"];
 
-    for (let i = 0; i < residents.length; i++) {
-      residents[i].id = residents[i].identificatie;
+    for (let i = 0; i < securities.length; i++) {
+      securities[i].id = securities[i].identificatie;
     }
   }
 
   const columns = [
-    {field: 'name', headerName: 'Given name', flex: 1},
-    {field: 'type', headerName: 'Last name', flex: 1}, {
-      field: 'id',
+    {field: 'name', headerName: 'Name', flex: 1},
+    {field: 'type', headerName: 'Last name', flex: 1},
+    {field: 'id',
       headerName: 'View', renderCell: (params: GridRenderCellParams) => (
         <strong>
-          <Link
+          <Link style={{marginLeft: 20}}
             href={"/attributes/" + params.value}
           >
-            View
+            <PictureAsPdfOutlined />
+          </Link>
+          <Link style={{marginLeft: 20}}
+            href={"/attributes/" + params.value}
+          >
+            <CropSquare />
           </Link>
         </strong>
       ), flex: 1
@@ -39,9 +45,9 @@ export default function ResidentTable({residents = null}) {
 
   return (
     <div style={{height: 400, width: '100%'}}>
-      {residents ? (
+      {securities ? (
           <DataGrid
-            rows={residents}
+            rows={securities}
             columns={columns}
             pageSize={20}
             rowsPerPageOptions={[100]}

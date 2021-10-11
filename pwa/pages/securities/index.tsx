@@ -4,8 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
 import Box from "@material-ui/core/Box";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import Searchbar from "../../components/residents/searchbar";
-import ResidentTable from "../../components/residents/table";
+import SecuritiesTable from "../../components/securities/table";
 
 function Index() {
 
@@ -21,8 +20,8 @@ function Index() {
     }),
   );
 
-  const title = 'Inwoners'
-  const description = 'Zoek op inwoner, BSN of trefwoord'
+  const title = 'Waardepapieren'
+  const description = 'Omschrijving'
   const classes = useStyles();
 
   return <>
@@ -34,14 +33,9 @@ function Index() {
           <Box paddingTop={2} paddingBottom={2}>
             <p>{description}</p>
           </Box>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={12}>
-              <Searchbar />
-            </Grid>
-          </Grid>
           <Grid className={classes.marginTop} container spacing={4}>
             <Grid item xs={12} sm={12} md={12}>
-              <ResidentTable />
+              <SecuritiesTable />
             </Grid>
           </Grid>
         </Grid>
