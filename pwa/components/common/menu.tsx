@@ -5,37 +5,29 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
 import Box from "@material-ui/core/Box";
-
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import LockIcon from '@material-ui/icons/Lock';
-import MailIcon from '@material-ui/icons/Mail';
-import PersonIcon from '@material-ui/icons/Person';
-
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from "next/link";
 import Drawer from '@material-ui/core/Drawer';
 import {useRouter} from 'next/router';
-
-
 import ActionMenu from "../../components/common/actionmenu";
-import PageHeader from "./pageheader";
-import Grid from "@material-ui/core/Grid";
-import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
-import {useGet, useMutate} from "restful-react";
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
+import {Button, Modal, TextField} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+  },
+
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    textAlign: "center",
   },
 
   menuButton: {
@@ -102,6 +94,13 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     backgroundColor: '#CA464C'
   },
+
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
 }));
 
 const handleLogout = (context) => {
@@ -151,6 +150,50 @@ export default function MainMenu() {
 
   let context = useAppContext();
   let userContext = useUserContext();
+
+
+  //this is for local development
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+
+  const [modalStyle] = React.useState(getModalStyle);
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Login</h2>
+      <div id="simple-modal-description" style={{textAlign: "center"}}>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="standard-basic" label="Username" />
+          <TextField id="standard-basic" label="Password" />
+          <Button type="submit">
+            Login
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
 
   return (
     <div className={classes.grow}>
@@ -206,7 +249,7 @@ export default function MainMenu() {
                           // <Link href="http://localhost/login/adfs/conduction" >
                           //   <span style={{color: 'white'}}>Inloggen</span>
                           // </Link>
-                            <span onClick={handleLogin} style={{color: 'white'}}>Inloggen</span>
+                            <span onClick={handleOpen} style={{color: 'white'}}>Inloggen</span>
                     }
               </Typography>
             </Box>
@@ -214,6 +257,16 @@ export default function MainMenu() {
           </Toolbar>
         </Container>
       </AppBar>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <p>
+          {body}
+        </p>
+      </Modal>
     </div>
   );
 }
