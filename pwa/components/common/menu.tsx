@@ -107,11 +107,11 @@ const useStyles = makeStyles((theme) => ({
 const handleLogout = (context) => {
 
   if (typeof window !== "undefined") {
-      context.user = null;
+    context.user = null;
 
-      // @ts-ignore
-      window.location.href = 'http://localhost/logout';
-    }
+    // @ts-ignore
+    window.location.href = 'http://localhost/logout';
+  }
 }
 
 export default function MainMenu() {
@@ -157,15 +157,20 @@ export default function MainMenu() {
       <AppBar position="static" className={classes.appbar}>
         <Container>
           <Toolbar>
-            <Box style={{marginRight: "25px"}}>
-              <Typography variant="h6" color="inherit">
-                <Link href="/residents">
-                  <span style={{color: 'white'}}>
-                    Ander persoon
-                  </span>
-                </Link>
-              </Typography>
-            </Box>
+            {
+              userContext.user !== null &&
+              <Box style={{marginRight: "25px"}}>
+                <Typography variant="h6" color="inherit">
+                  <Link href="/residents">
+              <span style={{color: 'white'}}>
+            {
+              userContext.user.name
+            }
+              </span>
+                  </Link>
+                </Typography>
+              </Box>
+            }
             <Box style={{marginRight: "25px"}}>
               <Typography variant="h6" color="inherit">
                 <Link href="/securities">
@@ -185,23 +190,23 @@ export default function MainMenu() {
               </Typography>
             </Box>
             {
-            <div className={classes.sectionMobile}>
-              <IconButton aria-label="show 17 new notifications" color="inherit"
-                          onClick={toggleDrawer('displayUserDrawer', true)}>
-                <MenuIcon/>
-              </IconButton>
-              <Drawer anchor={'left'} open={state['displayUserDrawer']}
-                      onClose={toggleDrawer('displayUserDrawer', false)}>
-                <div
-                  className={classes.list}
-                  role="presentation"
-                  onClick={toggleDrawer('displayUserDrawer', false)}
-                  onKeyDown={toggleDrawer('displayUserDrawer', false)}
-                >
-                  <ActionMenu/>
-                </div>
-              </Drawer>
-            </div>
+              <div className={classes.sectionMobile}>
+                <IconButton aria-label="show 17 new notifications" color="inherit"
+                            onClick={toggleDrawer('displayUserDrawer', true)}>
+                  <MenuIcon/>
+                </IconButton>
+                <Drawer anchor={'left'} open={state['displayUserDrawer']}
+                        onClose={toggleDrawer('displayUserDrawer', false)}>
+                  <div
+                    className={classes.list}
+                    role="presentation"
+                    onClick={toggleDrawer('displayUserDrawer', false)}
+                    onKeyDown={toggleDrawer('displayUserDrawer', false)}
+                  >
+                    <ActionMenu/>
+                  </div>
+                </Drawer>
+              </div>
             }
 
             <div className={classes.grow}/>
@@ -210,7 +215,7 @@ export default function MainMenu() {
               <Typography variant="h6" color="inherit">
                 {
                   userContext.user !== null &&
-                  <Link href="/user" >
+                  <Link href="/user">
                   <span style={{color: 'white'}}>
                     {
                       userContext.user.name
@@ -223,17 +228,17 @@ export default function MainMenu() {
             </Box>
             <Box marginRight={2}>
               <Typography variant="h6" color="inherit">
-                    {
-                      userContext.user !== null
-                        ?
-                          <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
-                        :
-                          // Local disabled
-                          // <Link href="http://localhost/login/adfs/conduction" >
-                          //   <span style={{color: 'white'}}>Inloggen</span>
-                          // </Link>
-                            <span onClick={handleLogin} style={{color: 'white'}}>Inloggen</span>
-                    }
+                {
+                  userContext.user !== null
+                    ?
+                    <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
+                    :
+                    // Local disabled
+                    // <Link href="http://localhost/login/adfs/conduction" >
+                    //   <span style={{color: 'white'}}>Inloggen</span>
+                    // </Link>
+                    <span onClick={handleLogin} style={{color: 'white'}}>Inloggen</span>
+                }
               </Typography>
             </Box>
 

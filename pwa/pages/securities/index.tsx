@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from '@material-ui/core/MenuItem';
 import {Select, FormControl, FormLabel} from '@material-ui/core';
 import Link from "@material-ui/core/Link";
+import {useUserContext} from "../../components/context/userContext";
 
 
 function Index() {
@@ -28,6 +29,7 @@ function Index() {
     }),
   );
   const classes = useStyles();
+  let userContext = useUserContext();
 
   // Style modal
   const style = {
@@ -81,9 +83,14 @@ function Index() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Waardepapier
           </Typography>
-          <Typography id="modal-modal-description" style={{marginTop: 20}}>
-            Naam persoon + adres
-          </Typography>
+          {
+            userContext.user !== null &&
+            <Typography id="modal-modal-description" style={{marginTop: 20}}>
+              {
+                userContext.user.name + userContext.user.address
+              }
+            </Typography>
+          }
           <Typography id="modal-modal-select" style={{marginTop: 20}}>
             <FormControl fullWidth>
               <FormLabel id="securety">Kies een waardepapier:</FormLabel>
