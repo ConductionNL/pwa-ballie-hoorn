@@ -26,7 +26,7 @@ export default function SecurityModal() {
   const handleClose = () => setOpen(false);
   const [setType] = React.useState('');
   const handleChange = (event) => {
-    setType(event.target.value);
+    // setType(event.target.value);
   };
 
   return (

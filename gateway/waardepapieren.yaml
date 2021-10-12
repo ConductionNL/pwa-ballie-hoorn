@@ -29,6 +29,12 @@ App\Entity\Gateway:
         apikey: a78828b4-f577-4425-a17c-c217980409e9
         location: https://acc-waardepapieren.commonground.nu/api/v1/wrc
         documentation: https://raw.githubusercontent.com/ConductionNL/webresourcecatalogus/master/api/public/schema/openapi.yaml
+    uc_api:
+        name: user component
+        auth: apikey
+        apikey: a78828b4-f577-4425-a17c-c217980409e9
+        location: https://acc-waardepapieren.commonground.nu/api/v1/uc
+        documentation: https://raw.githubusercontent.com/ConductionNL/user-component/master/api/public/schema/openapi.yaml    
         
 App\Entity\Authentication:
     authentication_1:
@@ -41,7 +47,30 @@ App\Entity\Authentication:
             - openid
             - profile
 
+App\Entity\Entity:
+    # BRP object
+    brp:
+        route: '/api/brp'
+        name: brp
+        description: Dit endpoint behandeld alle functionaliteit rondom inwoners.
+        gateway: '@brp_api'
+        endpoint: 'brp'
+        extend: false
 
-
-
-
+    # Waardepapieren object
+    securety:
+        route: '/api/securities'
+        name: secureties
+        description: Dit endpoint behandeld alle functionaliteit rondom waardepapieren.
+        gateway: '@waardepapieren_register_api'
+        endpoint: 'securities'
+        extend: false
+        
+    # User object
+    user:
+        route: '/api/users'
+        name: users
+        description: Dit endpoint behandeld alle functionaliteit rondom users of gebruikers.
+        gateway: '@uc_api'
+        endpoint: 'users'
+        extend: false    
