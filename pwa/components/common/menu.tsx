@@ -31,6 +31,7 @@ import Grid from "@material-ui/core/Grid";
 import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
 import {useGet, useMutate} from "restful-react";
 import {useAppContext} from "../context/state";
+import {useUserContext} from "../context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -115,8 +116,6 @@ const handleLogout = (context) => {
 
 export default function MainMenu() {
 
-  const [user, setUser] = useState();
-
   const router = useRouter()
   const classes = useStyles();
 
@@ -134,38 +133,24 @@ export default function MainMenu() {
     setState({...state, [anchor]: open});
   };
 
-  // const loginUser = (status) => {
-  //   setState({...state, ['loggedIn']: status});
-  // };
+  const handleLogin = () => {
+    let data = {
+      name: 'gino kok',
+      firstName: 'gino',
+      lastName: 'kok'
+    };
 
-  // const spoofLogin = () => {
-  //   setUser(true);
-  //   console.log(user);
-  // }
-  //
-  const spoofLogout = () => {
-    setUser(null);
-    console.log(user);
+    localStorage.setItem('user', JSON.stringify(data));
+    userContext.setUser(data);
   }
 
-  const {mutate: loginUser} = useMutate({
-    verb: "POST",
-    path: `/login`,
-  });
-
-  const handleLogin = () => {
-    const data = {
-      username: "iets",
-      password: "test123"
-    }
-
-    loginUser(data).then(() => {
-      // Set state
-      alert('yes')}
-    );
+  const handleLogout = () => {
+    localStorage.setItem('user', null);
+    userContext.setUser(null);
   }
 
   let context = useAppContext();
+  let userContext = useUserContext();
 
   return (
     <div className={classes.grow}>
@@ -224,11 +209,11 @@ export default function MainMenu() {
             <Box style={{marginRight: "15px"}}>
               <Typography variant="h6" color="inherit">
                 {
-                  context.user !== null &&
+                  userContext.user !== null &&
                   <Link href="/user" >
                   <span style={{color: 'white'}}>
                     {
-                      context.user.name
+                      userContext.user.name
                     }
                   </span>
                   </Link>
@@ -239,9 +224,9 @@ export default function MainMenu() {
             <Box marginRight={2}>
               <Typography variant="h6" color="inherit">
                     {
-                      user !== null
+                      userContext.user !== null
                         ?
-                          <span onClick={() => {spoofLogout}} style={{color: 'white'}}>Uitloggen</span>
+                          <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
                         :
                           // Local disabled
                           // <Link href="http://localhost/login/adfs/conduction" >

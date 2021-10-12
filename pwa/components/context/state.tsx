@@ -4,7 +4,6 @@ const AppContext = createContext(undefined);
 
 export function AppWrapper({ children }) {
   let sharedState = {
-    user: null,
     meUrl: "http://localhost/me",
     apiUrl: "http://localhost/api"
   }
@@ -17,9 +16,5 @@ export function AppWrapper({ children }) {
 }
 
 export function useAppContext() {
-  return useContext(AppContext);
-}
-
-export function setAppContext() {
   return useContext(AppContext);
 }
