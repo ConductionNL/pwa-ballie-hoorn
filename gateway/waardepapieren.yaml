@@ -50,20 +50,20 @@ App\Entity\Authentication:
 App\Entity\Entity:
     # BRP object
     brp:
-        route: '/api/brp'
+        route: '/api/ingeschrevenpersonen'
         name: brp
         description: Dit endpoint behandeld alle functionaliteit rondom inwoners.
         gateway: '@brp_api'
-        endpoint: 'brp'
+        endpoint: 'ingeschrevenpersonen'
         extend: false
 
     # Waardepapieren object
     security:
-        route: '/api/securities'
-        name: securities
+        route: '/api/certificates'
+        name: certificates
         description: Dit endpoint behandeld alle functionaliteit rondom waardepapieren.
         gateway: '@waardepapieren_register_api'
-        endpoint: 'securities'
+        endpoint: 'certificates'
         extend: false
         
     # User object
