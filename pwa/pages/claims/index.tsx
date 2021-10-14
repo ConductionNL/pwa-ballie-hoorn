@@ -16,7 +16,6 @@ import ActionMenu from "../../components/common/actionmenu";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import ClaimsTable from "../../components/claims/table";
-import QuestionsAccordion from "../../components/messages/questionsAccordion";
 
 import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -56,9 +55,6 @@ function Index() {
               </Grid>
             </Grid>
             <Grid className={classes.gridMarginTop} container spacing={2}>
-              <Grid item xs={12}>
-                <QuestionsAccordion/>
-              </Grid>
             </Grid>
           </Box>
         </Grid>
