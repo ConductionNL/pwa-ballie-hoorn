@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import List from "@mui/material/List";
 import {useUserContext} from "../context/userContext";
 
-const PageHeader = ({ title="Welcome to Demodam!", h1=false, description="default-description"}) => {
+const PageHeader = ({ title="Welcome to Demodam!", crumbs=[], h1=false, description="default-description"}) => {
   let userContext = useUserContext();
 
     return (
@@ -16,25 +16,28 @@ const PageHeader = ({ title="Welcome to Demodam!", h1=false, description="defaul
           Home
         </Link>
         {
-          userContext.user !== null &&
-          <Typography color="textPrimary">
-            {
-              userContext.user.name
-            }
-          </Typography>
+          crumbs.map(crumb => {
+            return crumb.link !== undefined ?
+                <Link color="inherit" href={crumb.link}>
+                  {crumb.name}
+                </Link>
+                :
+                <Typography color="textPrimary">
+                  {crumb.name}
+                </Typography>
+          })
         }
-          <Typography color="textPrimary">{title}</Typography>
+
       </Breadcrumbs>
       {
         h1 == true ?
-        <Typography variant="h1">
-          {title}
-        </Typography> :
+          <Typography variant="h1">
+            {title}
+          </Typography> :
           <Typography variant="h4">
             {title}
           </Typography>
       }
-
     </>
   );
 

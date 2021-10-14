@@ -1,8 +1,9 @@
-import {createContext, useContext} from 'react';
+import { createContext, useContext } from 'react';
 
 const AppContext = createContext(undefined);
 
 export function AppWrapper({ children }) {
+
   let sharedState = {};
   let meUrl;
   let apiUrl;
@@ -24,6 +25,7 @@ export function AppWrapper({ children }) {
       frontendUrl = 'https://verhuizen.demodam.nl';
     }
 
+
     sharedState = {
       meUrl: meUrl,
       apiUrl: apiUrl,
@@ -31,6 +33,8 @@ export function AppWrapper({ children }) {
       frontendUrl: frontendUrl,
     }
   }
+
+
   return (
     <AppContext.Provider value={sharedState}>
       {children}

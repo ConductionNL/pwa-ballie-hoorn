@@ -6,14 +6,7 @@ import {documentDownload} from "../utility/DocumentDownload";
 
 export default function ClaimsTable() {
 
-  var { data: claims } = useGet({
-    path: "gateways/waardepapieren-register/certificates"
-  });
-
-  /* lets catch hydra */
-  if (claims != null && claims["hydra:member"] !== undefined) {
-    claims = claims["hydra:member"];
-  }
+  let claims = null;
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, hide: true },

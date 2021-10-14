@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { alpha } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
@@ -16,6 +16,7 @@ import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import {Button, Modal, TextField} from "@mui/material";
 import {MenuLoginModal} from "./menuLoginModal";
+import UserManagement from "./userManagement";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -134,20 +135,10 @@ export default function MainMenu() {
     setState({...state, [anchor]: open});
   };
 
-  const handleLogin = () => {
-    let data = {
-      name: 'gino kok',
-      firstName: 'gino',
-      lastName: 'kok'
-    };
-
-    localStorage.setItem('user', JSON.stringify(data));
-    userContext.setUser(data);
-  }
-
   const handleLogout = () => {
-    localStorage.setItem('user', null);
+    sessionStorage.setItem('user', null);
     userContext.setUser(null);
+    router.push('/');
   }
 
   let context = useAppContext();
@@ -179,6 +170,15 @@ export default function MainMenu() {
       transform: `translate(-${top}%, -${left}%)`,
     };
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log(sessionStorage.getItem('user'));
+      if (sessionStorage.getItem('user') !== null) {
+        userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
+    }
+  }, []);
 
   const [modalStyle] = React.useState(getModalStyle);
 

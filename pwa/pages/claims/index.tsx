@@ -1,65 +1,154 @@
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Box from '@mui/material/Box';
-import React from "react";
-import Footer from "../../components/common/footer";
-import Head from "next/head";
-import Header from "../../components/common/header";
+import React, {useEffect} from "react";
 import PageHeader from "../../components/common/pageheader";
 import Typography from '@mui/material/Typography';
-import Link from 'next/link'
-
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import Hidden from '@mui/material/Hidden';
-import ActionMenu from "../../components/common/actionmenu";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import ClaimsTable from "../../components/claims/table";
-
 import makeStyles from '@mui/styles/makeStyles';
+import {TextField} from "@mui/material";
+import {useAppContext} from "../../components/context/state";
+import SearchIcon from '@mui/icons-material/Search';
+import {ChevronRight} from "@material-ui/icons";
+import {useUserContext} from "../../components/context/userContext";
+import LoginRequiredPage from "../../components/common/loginRequiredPage";
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridMarginTop: {
-    marginTop: '20px',
+  inputStyle: {
+      width: '400px',
   }
 }));
 
 function Index() {
   const classes = useStyles();
+  const context = useAppContext();
+  const userContext = useUserContext();
+
+  useEffect(() => {
+    console.log(userContext.user);
+  }, []);
 
   const title = 'Waardepapieren';
 
-  return <>
-    <Layout title={title} description="waar kan ik deze description zien">
-      <Grid container >
-        <Hidden mdDown>
-          <Grid item md={3}>
-            <ActionMenu />
-          </Grid>
-        </Hidden>
-        <Grid item sm={12} md={9}>
-          <PageHeader title={title} />
+  const [results, setResults] = React.useState(null);
 
-          <Box paddingTop={3} paddingBottom={2}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Card className={classes.root}>
-                  <CardContent>
-                    <ClaimsTable/>
-                  </CardContent>
-                </Card>
+  const [bsnInputError, setBsnInputError] = React.useState(false);
+  const [bsnInputHelperText, setBsnInputHelperText] = React.useState('');
+
+  const checkInputs = () => {
+    let valid = true;
+
+    let bsnInput = (document.getElementById('bsn') as HTMLInputElement);
+
+    setBsnInputError(false);
+    setBsnInputHelperText('');
+
+
+    if (bsnInput.value.length == 0) {
+      valid = false;
+      setBsnInputError(true);
+      setBsnInputHelperText('burgerservicenummer is verplicht');
+    }
+
+    return valid;
+  }
+
+  const handleBsn = () => {
+    if (typeof window !== 'undefined') {
+
+      let valid = checkInputs();
+
+      if (!valid) {
+        return;
+      }
+
+      let bsnInput = (document.getElementById('bsn') as HTMLInputElement);
+
+      fetch(context.apiUrl + "/gateways/brp/ingeschrevenpersonen?burgerservicenummer=" + bsnInput.value, {
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+        },
+      })
+        .then(response => response.json())
+        .then((data) =>  {
+          setResults(data);
+        });
+
+    }
+  }
+
+  const processBsn = (item) => {
+
+  }
+
+  return <>
+    {
+      userContext.user == null
+        ?
+          <LoginRequiredPage />
+        :
+          <Layout title={title} description="waar kan ik deze description zien">
+            <Grid container spacing={3}>
+              <Grid item sm={12}>
+                <PageHeader title="Inwoner selecteren" crumbs={
+                  [
+                    {
+                      name: "waardepapieren"
+                    },
+                    {
+                      name: "inwoner selecteren",
+                    }
+                  ]
+                }
+                />
+
+
+                <Typography mb="10px">
+                  Vul het burgerservicenummer in van de inwoner
+                </Typography>
+
+                <TextField
+                  id="bsn"
+                  label="Burgerservicenummer"
+                  required
+                  variant="outlined"
+                  className={classes.inputStyle}
+                  error={bsnInputError}
+                  helperText={bsnInputHelperText}
+                />
+                <br/>
+                <br/>
+
+                <Button color="primary" onClick={handleBsn} sx={{marginBottom: "20px"}} type="button" variant="contained" endIcon={<SearchIcon/>}>Zoeken</Button>
+
+
+                <Typography variant="h5">
+                  Gevonden personen
+                </Typography>
+                <Typography mb="10px">
+                  Staat de inwoner niet in de lijst, controleer dan het ingevulde burgerservicenummer en probeer opnieuw.
+                </Typography>
+
+                <div>
+                  {
+                    results !== undefined && results !== null && results['hydra:member'] !== undefined &&
+                    results['hydra:member'].map((result) => (
+                      <Grid sx={{marginBottom: "5px"}}>
+                        <Button
+                          onClick={() => {processBsn(result)}}
+                          color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
+                          {result.naam.aanschrijfwijze}
+                        </Button>
+                      </Grid>
+                    ))
+                  }
+                </div>
+
               </Grid>
             </Grid>
-            <Grid className={classes.gridMarginTop} container spacing={2}>
-            </Grid>
-          </Box>
-        </Grid>
-      </Grid>
-    </Layout>
+          </Layout>
+    }
   </>;
 }
 

@@ -32,8 +32,6 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
         <title>{title}</title>
       </Head>
 
-      <UserManagement />
-
       <Header/>
 
       <Container>

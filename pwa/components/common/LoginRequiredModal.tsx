@@ -10,7 +10,7 @@ import {ChevronRight} from "@mui/icons-material";
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 
-export function MenuLoginModal() {
+export function LoginRequiredModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -112,7 +112,7 @@ export function MenuLoginModal() {
 
   return (
     <div>
-      <span onClick={handleOpen} style={{color: 'white'}}>Inloggen</span>
+      <Button color="primary" onClick={handleOpen} sx={{width: "400px", marginBottom: "100px"}} type="button" variant="contained" >Inloggen</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

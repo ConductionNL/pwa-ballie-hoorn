@@ -3,32 +3,31 @@ import MainMenu from 'components/common/menu';
 import Container from '@mui/material/Container';
 import makeStyles from '@mui/styles/makeStyles';
 import Toolbar from "@mui/material/Toolbar";
-import React from "react";
+import React, {useState} from "react";
 import IconButton from "@mui/material/IconButton";
 import {useAppContext} from "../context/state";
 import {useGet} from "restful-react";
+import {useUserContext} from "../context/userContext";
+import {useRouter} from "next/router";
 
 
 export default function UserManagement() {
 
+  const userContext = useUserContext();
+
   const handleLogin = () => {
-
-    let context = useAppContext();
-    const { data: info } = useGet({
-      path: context.meUrl,
-    });
-
-    if (info !== null && info !== undefined) {
-      context.user = info;
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem('user') !== null) {
+        userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
     }
 
-    console.log(info);
-    console.log(context);
+    return null;
   }
 
   return (
-    <p>
-     
-    </p>
+    <div>
+      {handleLogin()}
+    </div>
   );
 }
