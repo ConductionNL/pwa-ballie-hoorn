@@ -4,8 +4,10 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 import List from "@material-ui/core/List";
+import {useUserContext} from "../context/userContext";
 
 const PageHeader = ({ title="Welcome to Demodam!", h1=false, description="default-description"}) => {
+  let userContext = useUserContext();
 
     return (
     <>
@@ -13,7 +15,15 @@ const PageHeader = ({ title="Welcome to Demodam!", h1=false, description="defaul
         <Link color="inherit" href="/user" >
           Home
         </Link>
-        <Typography color="textPrimary">{title}</Typography>
+        {
+          userContext.user !== null &&
+          <Typography color="textPrimary">
+            {
+              userContext.user.name
+            }
+          </Typography>
+        }
+          <Typography color="textPrimary">{title}</Typography>
       </Breadcrumbs>
       {
         h1 == true ?
