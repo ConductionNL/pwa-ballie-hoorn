@@ -8,6 +8,7 @@ import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/ma
 
 import makeStyles from '@mui/styles/makeStyles';
 import {RestfulProviderWrapper} from "../components/utility/RestfulProviderWrapper";
+import {ResidentContextWrapper} from "../components/context/residentContext";
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -28,13 +29,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper>
       <UserContextWrapper>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <RestfulProviderWrapper>
-              <Component {...pageProps} />
-            </RestfulProviderWrapper>
-          </ThemeProvider>
-        </StyledEngineProvider>
+        <ResidentContextWrapper>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <RestfulProviderWrapper>
+                <Component {...pageProps} />
+              </RestfulProviderWrapper>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </ResidentContextWrapper>
       </UserContextWrapper>
     </AppWrapper>
   );

@@ -17,6 +17,7 @@ import {useUserContext} from "../context/userContext";
 import {Button, Modal, TextField} from "@mui/material";
 import {MenuLoginModal} from "./menuLoginModal";
 import UserManagement from "./userManagement";
+import {useResidentContext} from "../context/residentContext";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -143,6 +144,7 @@ export default function MainMenu() {
 
   let context = useAppContext();
   let userContext = useUserContext();
+  let residentContext = useResidentContext();
 
 
   //this is for local development
@@ -173,9 +175,11 @@ export default function MainMenu() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      console.log(sessionStorage.getItem('user'));
       if (sessionStorage.getItem('user') !== null) {
         userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
+      if (sessionStorage.getItem('resident') !== null) {
+        residentContext.setResident(JSON.parse(sessionStorage.getItem('resident')));
       }
     }
   }, []);

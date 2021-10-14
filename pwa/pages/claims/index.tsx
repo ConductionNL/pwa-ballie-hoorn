@@ -11,6 +11,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import {ChevronRight} from "@material-ui/icons";
 import {useUserContext} from "../../components/context/userContext";
 import LoginRequiredPage from "../../components/common/loginRequiredPage";
+import {useResidentContext} from "../../components/context/residentContext";
+import {useRouter} from "next/router";
+import {ClaimModal} from "../../components/claims/ClaimModal";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -19,13 +22,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Index() {
+  const router = useRouter();
   const classes = useStyles();
   const context = useAppContext();
   const userContext = useUserContext();
-
-  useEffect(() => {
-    console.log(userContext.user);
-  }, []);
+  const residentContext = useResidentContext();
 
   const title = 'Waardepapieren';
 
@@ -79,7 +80,10 @@ function Index() {
   }
 
   const processBsn = (item) => {
+    residentContext.setResident(item);
+    sessionStorage.setItem('resident', JSON.stringify(item));
 
+    router.push('/claims/data');
   }
 
   return <>

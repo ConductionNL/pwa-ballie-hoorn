@@ -12,19 +12,19 @@ App\Entity\Gateway:
         location: https://conduction.demodam.nl/api/v1/brp
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-service/master/api/public/schema/openapi.yaml
     waardepapieren_service_api:
-        name: waardepapieren service
+        name: service
         auth: apikey
         apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         location: https://waardepapieren.demodam.nl/api/v1/service
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-service/master/api/public/schema/openapi.yaml
     waardepapieren_register_api:
-        name: waardepapieren service
+        name: register
         auth: apikey
         apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         location: https://waardepapieren.demodam.nl/api/v1/register
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-register/master/api/public/schema/openapi.yaml
     wrc_api:
-        name: webresource component
+        name: wrc
         auth: apikey
         apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         location: https://conduction.demodam.nl/api/v1/wrc

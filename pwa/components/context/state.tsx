@@ -9,6 +9,7 @@ export function AppWrapper({ children }) {
   let apiUrl;
   let baseUrl;
   let frontendUrl;
+  let brpUrl;
 
   if (typeof window !== 'undefined') {
     if (window.location.href.includes('http://localhost')) {
@@ -16,6 +17,7 @@ export function AppWrapper({ children }) {
       apiUrl = 'http://localhost/api';
       baseUrl = 'http://localhost';
       frontendUrl = 'http://localhost:3000';
+      brpUrl = 'https://conduction.demodam.nl/api/v1/brp'
     }
     else
     {
@@ -23,6 +25,7 @@ export function AppWrapper({ children }) {
       apiUrl = 'https://verhuizen.demodam.nl/api';
       baseUrl = 'https://verhuizen.demodam.nl';
       frontendUrl = 'https://verhuizen.demodam.nl';
+      brpUrl = 'https://conduction.demodam.nl/api/v1/brp'
     }
 
 
@@ -31,6 +34,7 @@ export function AppWrapper({ children }) {
       apiUrl: apiUrl,
       baseUrl: baseUrl,
       frontendUrl: frontendUrl,
+      brpUrl: 'https://conduction.demodam.nl/api/v1/brp'
     }
   }
 
