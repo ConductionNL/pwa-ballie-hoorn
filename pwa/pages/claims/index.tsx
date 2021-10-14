@@ -1,23 +1,23 @@
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Box from '@material-ui/core/Box';
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Box from '@mui/material/Box';
 import React from "react";
 import Footer from "../../components/common/footer";
 import Head from "next/head";
 import Header from "../../components/common/header";
 import PageHeader from "../../components/common/pageheader";
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import Link from 'next/link'
 
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
-import Hidden from '@material-ui/core/Hidden';
+import Grid from "@mui/material/Grid";
+import Hidden from '@mui/material/Hidden';
 import ActionMenu from "../../components/common/actionmenu";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import ClaimsTable from "../../components/claims/table";
 
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: '100%',
@@ -36,7 +36,7 @@ function Index() {
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
       <Grid container >
-        <Hidden smDown>
+        <Hidden mdDown>
           <Grid item md={3}>
             <ActionMenu />
           </Grid>
@@ -60,7 +60,7 @@ function Index() {
         </Grid>
       </Grid>
     </Layout>
-  </>
+  </>;
 }
 
 export default Index

@@ -1,18 +1,18 @@
 import {useRouter} from 'next/router'
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React from "react";
 import Link from 'next/link'
 
 import Header from "../../components/common/header";
-import Container from "@material-ui/core/Container";
+import Container from "@mui/material/Container";
 import Footer from "../../components/common/footer";
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
 import ActionMenu from "../../components/common/actionmenu";
 import PageHeader from "../../components/common/pageheader";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
 
 const Proof = () => {
@@ -25,7 +25,7 @@ const Proof = () => {
       <Layout title={title} description="waar kan ik deze description zien">
 
         <Grid container>
-          <Hidden smDown>
+          <Hidden mdDown>
             <Grid item md={3}>
               <ActionMenu/>
             </Grid>
@@ -41,7 +41,7 @@ const Proof = () => {
           </Grid>
         </Grid>
       </Layout>
-    </>
+    </>;
   }
 
 

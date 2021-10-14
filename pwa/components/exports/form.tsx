@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Box from "@material-ui/core/Box";
-import {Card, TextField} from '@material-ui/core';
-import Grid from "@material-ui/core/Grid";
-import MenuItem from '@material-ui/core/MenuItem';
-import {Select, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel} from '@material-ui/core';
-import Button from "@material-ui/core/Button";
-import CardContent from "@material-ui/core/CardContent";
-import {makeStyles} from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import {Card, TextField} from '@mui/material';
+import Grid from "@mui/material/Grid";
+import MenuItem from '@mui/material/MenuItem';
+import {Select, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel} from '@mui/material';
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import {useGet} from "restful-react";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import {useGet} from "restful-react";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import {documentDownload} from "../utility/DocumentDownload";
 
 export default function ClaimsTable() {

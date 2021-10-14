@@ -4,12 +4,34 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {AppWrapper} from "../components/context/state";
 import {UserContextWrapper} from "../components/context/userContext";
+import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
+
+import makeStyles from '@mui/styles/makeStyles';
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
+
+const theme = createTheme();
+
+const useStyles = makeStyles((theme) => {
+  root: {
+    // some css that access to theme
+  }
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper>
       <UserContextWrapper>
-        <Component {...pageProps} />
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </UserContextWrapper>
     </AppWrapper>
   );

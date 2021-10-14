@@ -1,19 +1,20 @@
 import React, {useState} from 'react';
-import {alpha, makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Box from "@material-ui/core/Box";
-import MenuIcon from '@material-ui/icons/Menu';
+import { alpha } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link";
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@mui/material/Drawer';
 import {useRouter} from 'next/router';
 import ActionMenu from "../../components/common/actionmenu";
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
-import {Button, Modal, TextField} from "@material-ui/core";
+import {Button, Modal, TextField} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -202,8 +203,11 @@ export default function MainMenu() {
           <Toolbar>
             {
               <div className={classes.sectionMobile}>
-                <IconButton aria-label="show 17 new notifications" color="inherit"
-                            onClick={toggleDrawer('displayUserDrawer', true)}>
+                <IconButton
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  onClick={toggleDrawer('displayUserDrawer', true)}
+                  size="large">
                   <MenuIcon/>
                 </IconButton>
                 <Drawer anchor={'left'} open={state['displayUserDrawer']}
