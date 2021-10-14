@@ -28,25 +28,21 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
 
   return (
     <>
-      <RestfulProvider
-        base={context.apiUrl}
-        requestOptions={(url, method, requestBody) => ({ headers: { Accept: 'application/json' }, credentials: 'include', mode: 'cors' })}>
-        <Head>
-          <title>{title}</title>
-        </Head>
+      <Head>
+        <title>{title}</title>
+      </Head>
 
-        <UserManagement />
+      <UserManagement />
 
-        <Header/>
+      <Header/>
 
-        <Container>
-          <Box paddingTop={2} paddingBottom={2}>
-          {children}
-          </Box>
-        </Container>
+      <Container>
+        <Box paddingTop={2} paddingBottom={2}>
+        {children}
+        </Box>
+      </Container>
 
-        <Footer />
-      </RestfulProvider>
+      <Footer />
     </>
   );
 

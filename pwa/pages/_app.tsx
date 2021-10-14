@@ -7,6 +7,7 @@ import {UserContextWrapper} from "../components/context/userContext";
 import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
 import makeStyles from '@mui/styles/makeStyles';
+import {RestfulProviderWrapper} from "../components/utility/RestfulProviderWrapper";
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserContextWrapper>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+            <RestfulProviderWrapper>
+              <Component {...pageProps} />
+            </RestfulProviderWrapper>
           </ThemeProvider>
         </StyledEngineProvider>
       </UserContextWrapper>

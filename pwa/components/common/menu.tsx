@@ -15,6 +15,7 @@ import ActionMenu from "../../components/common/actionmenu";
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import {Button, Modal, TextField} from "@mui/material";
+import {MenuLoginModal} from "./menuLoginModal";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -252,7 +253,7 @@ export default function MainMenu() {
                     // <Link href="http://localhost/login/adfs/conduction" >
                     //   <span style={{color: 'white'}}>Inloggen</span>
                     // </Link>
-                    <span onClick={handleLogin} style={{color: 'white'}}>Inloggen</span>
+                    <MenuLoginModal />
                 }
               </Typography>
             </Box>
