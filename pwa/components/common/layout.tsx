@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Container from "@material-ui/core/Container";
-import Box from '@material-ui/core/Box';
+import Container from "@mui/material/Container";
+import Box from '@mui/material/Box';
 import React from "react";
 
 import Header from "./header";
 import Footer from "./footer";
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import {RestfulProvider, useGet} from "restful-react";
 import {useAppContext} from "../context/state";
 import {setCookie} from "../utility/CookieHandler";
@@ -28,25 +28,19 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
 
   return (
     <>
-      <RestfulProvider
-        base={context.apiUrl}
-        requestOptions={(url, method, requestBody) => ({ headers: { Accept: 'application/json' }, credentials: 'include', mode: 'cors' })}>
-        <Head>
-          <title>{title}</title>
-        </Head>
+      <Head>
+        <title>{title}</title>
+      </Head>
 
-        <UserManagement />
+      <Header/>
 
-        <Header/>
+      <Container>
+        <Box paddingTop={2} paddingBottom={2}>
+        {children}
+        </Box>
+      </Container>
 
-        <Container>
-          <Box paddingTop={2} paddingBottom={2}>
-          {children}
-          </Box>
-        </Container>
-
-        <Footer />
-      </RestfulProvider>
+      <Footer />
     </>
   );
 

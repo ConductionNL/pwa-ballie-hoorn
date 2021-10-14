@@ -2,33 +2,39 @@ App\Entity\Gateway:
     cc_api:
         name: contactcatalogus
         auth: apikey
-        apikey: a78828b4-f577-4425-a17c-c217980409e9
-        location: http://contactcatalogus.svc.cluster.local
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/cc
         documentation: https://raw.githubusercontent.com/ConductionNL/contactcatalogus/master/api/public/schema/openapi.yaml
     brp_api:
         name: brp
         auth: apikey
-        apikey: a78828b4-f577-4425-a17c-c217980409e9
-        location: https://acc-waardepapieren.commonground.nu/api/v1/brp
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/brp
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-service/master/api/public/schema/openapi.yaml
     waardepapieren_service_api:
-        name: waardepapieren service
+        name: service
         auth: apikey
-        apikey: a78828b4-f577-4425-a17c-c217980409e9
-        location: https://acc-waardepapieren.commonground.nu/api/v1/waar
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://waardepapieren.demodam.nl/api/v1/service
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-service/master/api/public/schema/openapi.yaml
     waardepapieren_register_api:
-        name: waardepapieren service
+        name: register
         auth: apikey
-        apikey: a78828b4-f577-4425-a17c-c217980409e9
-        location: https://acc-waardepapieren.commonground.nu/api/v1/wari
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://waardepapieren.demodam.nl/api/v1/register
         documentation: https://raw.githubusercontent.com/ConductionNL/waardepapieren-register/master/api/public/schema/openapi.yaml
     wrc_api:
-        name: webresource component
+        name: wrc
         auth: apikey
-        apikey: a78828b4-f577-4425-a17c-c217980409e9
-        location: https://acc-waardepapieren.commonground.nu/api/v1/wrc
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/wrc
         documentation: https://raw.githubusercontent.com/ConductionNL/webresourcecatalogus/master/api/public/schema/openapi.yaml
+    uc_api:
+        name: user component
+        auth: apikey
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/uc
+        documentation: https://raw.githubusercontent.com/ConductionNL/user-component/master/api/public/schema/openapi.yaml    
         
 App\Entity\Authentication:
     authentication_1:
@@ -41,7 +47,39 @@ App\Entity\Authentication:
             - openid
             - profile
 
+App\Entity\Entity:
+    # BRP object
+    brp:
+        route: '/api/ingeschrevenpersonen'
+        name: brp
+        description: Dit endpoint behandeld alle functionaliteit rondom inwoners.
+        gateway: '@brp_api'
+        endpoint: 'ingeschrevenpersonen'
+        extend: false
 
-
-
-
+    # Waardepapieren object
+    security:
+        route: '/api/certificates'
+        name: certificates
+        description: Dit endpoint behandeld alle functionaliteit rondom waardepapieren.
+        gateway: '@waardepapieren_register_api'
+        endpoint: 'certificates'
+        extend: false
+        
+    # Waardepapieren-service object
+    waardepapieren_service:
+        route: '/api/waardepapieren_service'
+        name: waardepapieren_service
+        description: Dit endpoint behandeld alle functionaliteit rondom waardepapieren.
+        gateway: '@waardepapieren_service_api'
+        endpoint: 'securities'
+        extend: false
+        
+    # User object
+    user:
+        route: '/api/users'
+        name: users
+        description: Dit endpoint behandeld alle functionaliteit rondom users of gebruikers.
+        gateway: '@uc_api'
+        endpoint: 'users'
+        extend: false    
