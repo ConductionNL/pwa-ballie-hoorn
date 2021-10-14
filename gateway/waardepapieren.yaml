@@ -66,6 +66,15 @@ App\Entity\Entity:
         endpoint: 'certificates'
         extend: false
         
+    # Waardepapieren-service object
+    waardepapieren_service:
+        route: '/api/waardepapieren_service'
+        name: waardepapieren_service
+        description: Dit endpoint behandeld alle functionaliteit rondom waardepapieren.
+        gateway: '@waardepapieren_service_api'
+        endpoint: 'securities'
+        extend: false
+        
     # User object
     user:
         route: '/api/users'

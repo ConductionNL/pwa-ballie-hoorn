@@ -3,11 +3,14 @@ import type { AppProps /*, AppContext */ } from "next/app";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {AppWrapper} from "../components/context/state";
+import {UserContextWrapper} from "../components/context/userContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper>
-      <Component {...pageProps} />
+      <UserContextWrapper>
+        <Component {...pageProps} />
+      </UserContextWrapper>
     </AppWrapper>
   );
 }
