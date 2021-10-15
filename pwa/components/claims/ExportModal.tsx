@@ -9,8 +9,9 @@ import {Alert, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField} f
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import {useResidentContext} from "../context/residentContext";
-import { DatePicker } from "antd";
-import "antd/dist/antd.css";
+import StaticDatePicker from '@mui/lab/StaticDatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 export function ExportModal() {
   const [open, setOpen] = React.useState(false);
@@ -18,15 +19,12 @@ export function ExportModal() {
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
 
+  const maxDateOfMoveObject = new Date();
+  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 28);
+
   const handleFileTypeChange = (event) => {
     setFileType(event.target.value);
   };
-  function onStartDateChange(date, dateString) {
-    setStartDate(date);
-  }
-  function onEndDateChange(date, dateString) {
-    setEndDate(date);
-  }
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,10 +36,11 @@ export function ExportModal() {
   const handleExport = event => {
     event.preventDefault();
 
-    console.log(startDate)
     if (startDate >= endDate) {
       // TODO: If startDate an endDate are not set, error
       console.log('start date should be before end date')
+      console.log(startDate)
+      console.log(endDate)
     }
 
     // TODO: Get file from gateway with person, startDate, endDate and fileType
@@ -103,18 +102,39 @@ export function ExportModal() {
                   <MenuItem value="text/csv">csv</MenuItem>
                 </Select>
               </FormControl>
-              <br/><br/>
+              <br/>
+              <br/>
+
               <InputLabel id="demo-simple-select-label">Start datum</InputLabel>
-              <FormControl fullWidth>
-                <DatePicker onChange={onStartDateChange} />
-              </FormControl>
-              <br/><br/>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <StaticDatePicker
+                  maxDate={new Date()}
+                  displayStaticWrapperAs="desktop"
+                  openTo="day"
+                  value={new Date()}
+                  onChange={(newValue) => {
+                    setStartDate(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+
               <InputLabel id="demo-simple-select-label">Eind datum</InputLabel>
-              <FormControl fullWidth>
-                <DatePicker onChange={onEndDateChange} />
-              </FormControl>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <StaticDatePicker
+                  minDate={startDate}
+                  maxDate={new Date()}
+                  displayStaticWrapperAs="desktop"
+                  openTo="day"
+                  value={new Date()}
+                  onChange={(newValue) => {
+                    setEndDate(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
               <br/>
-              <br/>
+
               <Button color="primary" sx={{width: "100%"}} type="submit" variant="contained" >Exporteren</Button>
             </form>
           </Box>
