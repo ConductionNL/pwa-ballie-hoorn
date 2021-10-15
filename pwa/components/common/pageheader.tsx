@@ -12,7 +12,7 @@ const PageHeader = ({ title="Welcome to Demodam!", crumbs=[], h1=false, descript
     return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" href="/user" >
+        <Link color="inherit" href="/" >
           Home
         </Link>
         {
