@@ -20,7 +20,10 @@ export function ClaimModal() {
   };
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload(); // TODO: do something else to refresh the table, not the page!
+  }
 
   const context = useAppContext();
   const userContext = useUserContext();
@@ -45,6 +48,7 @@ export function ClaimModal() {
     })
       .then((response) => {
         if (response.ok) {
+          handleClose();
           return response.json();
         } else {
           throw new Error('Something went wrong');
