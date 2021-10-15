@@ -45,7 +45,8 @@ export function ExportModal() {
 
     // TODO: Get file from gateway with person, startDate, endDate and fileType
 
-    fetch(context.apiUrl + "/gateways/register/certificates?person=" + residentContext.resident['@id'], {
+    fetch(context.apiUrl + "/gateways/register/certificates?person=" + residentContext.resident['@id'] +
+      '&startDate=' + startDate.toISOString().split('T')[0] + '&endDate=' + endDate.toISOString().split('T')[0], {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
