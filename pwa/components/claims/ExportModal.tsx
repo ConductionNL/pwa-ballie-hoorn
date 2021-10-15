@@ -38,8 +38,13 @@ export function ExportModal() {
   const handleExport = event => {
     event.preventDefault();
 
-    //If at least startDate or endDate is set, continue
-    //Get file from gateway with person, startDate, endDate and fileType
+    console.log(startDate)
+    if (startDate >= endDate) {
+      // TODO: If startDate an endDate are not set, error
+      console.log('start date should be before end date')
+    }
+
+    // TODO: Get file from gateway with person, startDate, endDate and fileType
 
     fetch(context.apiUrl + "/gateways/register/certificates?person=" + residentContext.resident['@id'], {
       credentials: 'include',
