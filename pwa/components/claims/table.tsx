@@ -117,6 +117,7 @@ export default function ClaimsTable() {
               pageSize={100}
               rowsPerPageOptions={[100]}
               disableSelectionOnClick
+              sortModel={[{ field: 'dateCreated', sort: 'desc' }]}
             />
           )
           :
