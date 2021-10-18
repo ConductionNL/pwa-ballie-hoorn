@@ -61,7 +61,7 @@ export default function ClaimsTable() {
       flex: 1,
       valueFormatter: (params) => {
         let valueFormatted = new Date(params.value);
-        valueFormatted = valueFormatted.toLocaleString("en-GB");
+        let result = valueFormatted.toLocaleString("en-GB");
         return `${valueFormatted}`;
       },
     },
