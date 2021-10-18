@@ -21,11 +21,11 @@ export function AppWrapper({ children }) {
     }
     else
     {
-      meUrl = 'https://verhuizen.demodam.nl/api/users/me';
-      apiUrl = 'https://verhuizen.demodam.nl/api';
-      baseUrl = 'https://verhuizen.demodam.nl';
-      frontendUrl = 'https://verhuizen.demodam.nl';
-      brpUrl = 'https://conduction.demodam.nl/api/v1/brp'
+      meUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api/users/me';
+      apiUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api';
+      baseUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
+      frontendUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
+      brpUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api/v1/brp'
     }
 
 

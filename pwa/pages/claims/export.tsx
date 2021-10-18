@@ -46,7 +46,6 @@ function Index() {
   const handleExport = event => {
     event.preventDefault();
     console.log(context.apiUrl + "/gateways/register/certificates." + fileType +"?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0]);
-    return;
     fetch(context.apiUrl + "/gateways/register/certificates?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0], {
       credentials: 'include',
       headers: {

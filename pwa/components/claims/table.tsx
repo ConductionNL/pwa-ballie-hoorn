@@ -50,11 +50,20 @@ export default function ClaimsTable() {
       field: 'type',
       headerName: 'Type',
       flex: 1,
+      valueFormatter: (params) => {
+        const valueFormatted = params.value.replaceAll('_', ' ');
+        return `${valueFormatted}`;
+      },
     },
     {
       field: 'dateCreated',
       headerName: 'Aangemaakt op',
       flex: 1,
+      valueFormatter: (params) => {
+        let valueFormatted = new Date(params.value);
+        let result = valueFormatted.toLocaleString("en-GB");
+        return `${valueFormatted}`;
+      },
     },
     {
       field: "Pdf",
@@ -108,6 +117,7 @@ export default function ClaimsTable() {
               pageSize={100}
               rowsPerPageOptions={[100]}
               disableSelectionOnClick
+              sortModel={[{ field: 'dateCreated', sort: 'desc' }]}
             />
           )
           :
