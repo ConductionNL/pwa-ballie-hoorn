@@ -45,18 +45,22 @@ function Index() {
 
   const handleExport = event => {
     event.preventDefault();
-    console.log(context.apiUrl + "/gateways/register/certificates." + fileType +"?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0]);
     fetch(context.apiUrl + "/gateways/register/certificates?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0], {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': fileType,
+        'Accept': 'text/csv',
         'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
       },
     }).then(response => response.json())
       .then((data) =>  {
+        if (typeof window !== "undefined") {
+          window.open(context.apiUrl + "/gateways/register/certificates."+ fileType +"?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0], '_blank').focus();
+        }
         console.log(data)
       });
+
+
   }
 
   return <>
