@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import makeStyles from '@mui/styles/makeStyles';
-import {TextField} from "@mui/material";
+import {Backdrop, CircularProgress, TextField} from "@mui/material";
 import {useAppContext} from "../../components/context/state";
 import SearchIcon from '@mui/icons-material/Search';
 import {ChevronRight} from "@material-ui/icons";
@@ -27,6 +27,14 @@ function Index() {
   const context = useAppContext();
   const userContext = useUserContext();
   const residentContext = useResidentContext();
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   const title = 'Waardepapieren';
 
@@ -62,6 +70,8 @@ function Index() {
         return;
       }
 
+      handleToggle();
+
       let bsnInput = (document.getElementById('bsn') as HTMLInputElement);
 
       fetch(context.apiUrl + "/gateways/brp/ingeschrevenpersonen?burgerservicenummer=" + bsnInput.value, {
@@ -73,6 +83,7 @@ function Index() {
       })
         .then(response => response.json())
         .then((data) =>  {
+          handleClose();
           setResults(data);
         });
 
@@ -92,67 +103,75 @@ function Index() {
         ?
           <LoginRequiredPage />
         :
-          <Layout title={title} description="waar kan ik deze description zien">
-            <Grid container spacing={3}>
-              <Grid item sm={12}>
-                <PageHeader title="Inwoner selecteren" crumbs={
-                  [
-                    {
-                      name: "waardepapieren"
-                    },
-                    {
-                      name: "inwoner selecteren",
-                    }
-                  ]
-                }
-                />
-
-
-                <Typography mb="10px">
-                  Vul het burgerservicenummer in van de inwoner
-                </Typography>
-
-                <TextField
-                  id="bsn"
-                  label="Burgerservicenummer"
-                  required
-                  variant="outlined"
-                  className={classes.inputStyle}
-                  error={bsnInputError}
-                  helperText={bsnInputHelperText}
-                />
-                <br/>
-                <br/>
-
-                <Button color="primary" onClick={handleBsn} sx={{marginBottom: "20px"}} type="button" variant="contained" endIcon={<SearchIcon/>}>Zoeken</Button>
-
-
-                <Typography variant="h5">
-                  Gevonden personen
-                </Typography>
-                <Typography mb="10px">
-                  Staat de inwoner niet in de lijst, controleer dan het ingevulde burgerservicenummer en probeer opnieuw.
-                </Typography>
-
-                <div>
-                  {
-                    results !== undefined && results !== null && results['hydra:member'] !== undefined &&
-                    results['hydra:member'].map((result) => (
-                      <Grid sx={{marginBottom: "5px"}}>
-                        <Button
-                          onClick={() => {processBsn(result)}}
-                          color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
-                          {result.naam.aanschrijfwijze}
-                        </Button>
-                      </Grid>
-                    ))
+          <>
+            <Layout title={title} description="waar kan ik deze description zien">
+              <Grid container spacing={3}>
+                <Grid item sm={12}>
+                  <PageHeader title="Inwoner selecteren" crumbs={
+                    [
+                      {
+                        name: "waardepapieren"
+                      },
+                      {
+                        name: "inwoner selecteren",
+                      }
+                    ]
                   }
-                </div>
+                  />
 
+
+                  <Typography mb="10px">
+                    Vul het burgerservicenummer in van de inwoner
+                  </Typography>
+
+                  <TextField
+                    id="bsn"
+                    label="Burgerservicenummer"
+                    required
+                    variant="outlined"
+                    className={classes.inputStyle}
+                    error={bsnInputError}
+                    helperText={bsnInputHelperText}
+                  />
+                  <br/>
+                  <br/>
+
+                  <Button color="primary" onClick={handleBsn} sx={{marginBottom: "20px"}} type="button" variant="contained" endIcon={<SearchIcon/>}>Zoeken</Button>
+
+
+                  <Typography variant="h5">
+                    Gevonden personen
+                  </Typography>
+                  <Typography mb="10px">
+                    Staat de inwoner niet in de lijst, controleer dan het ingevulde burgerservicenummer en probeer opnieuw.
+                  </Typography>
+
+                  <div>
+                    {
+                      results !== undefined && results !== null && results['hydra:member'] !== undefined &&
+                      results['hydra:member'].map((result) => (
+                        <Grid sx={{marginBottom: "5px"}}>
+                          <Button
+                            onClick={() => {processBsn(result)}}
+                            color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
+                            {result.naam.aanschrijfwijze}
+                          </Button>
+                        </Grid>
+                      ))
+                    }
+                  </div>
+
+                </Grid>
               </Grid>
-            </Grid>
-          </Layout>
-    }
+            </Layout>
+            <Backdrop
+              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={open}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          </>
+              }
   </>;
 }
 

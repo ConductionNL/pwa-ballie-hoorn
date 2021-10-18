@@ -27,11 +27,19 @@ function Index() {
   const title = 'Waardepapieren';
   const router = useRouter();
 
-  useEffect(() => {
-    if (residentContext.resident == null) {
-      router.push('/claims');
-    }
-  }, []);
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  // useEffect(() => {
+  //   if (residentContext.resident == null) {
+  //     router.push('/claims');
+  //   }
+  // }, []);
 
   return <>
     {
