@@ -56,7 +56,7 @@ function Index() {
 
 
                 <Typography>
-                  In dit tabel staan de huidige waardepapieren van {residentContext.resident.naam.aanschrijfwijze}
+                  In deze tabel staan de huidige waardepapieren van {residentContext.resident.naam.aanschrijfwijze}
                 </Typography>
                 <br/>
                 <br/>

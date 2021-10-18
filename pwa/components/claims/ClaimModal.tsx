@@ -20,7 +20,9 @@ export function ClaimModal() {
   };
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const context = useAppContext();
   const userContext = useUserContext();
@@ -45,6 +47,8 @@ export function ClaimModal() {
     })
       .then((response) => {
         if (response.ok) {
+          handleClose();
+          window.location.reload(); // TODO: do something else to refresh the table, not the page!
           return response.json();
         } else {
           throw new Error('Something went wrong');
@@ -91,7 +95,6 @@ export function ClaimModal() {
             <Typography id="transition-modal-title" variant="h5" mb={2} component="h2">
               Claim aanmaken
             </Typography>
-            <br/>
             <br/>
             <form onSubmit={handleClaim}>
               <FormControl fullWidth>

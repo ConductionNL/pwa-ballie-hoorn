@@ -1,11 +1,26 @@
 import React, {useEffect} from 'react';
+import makeStyles from '@mui/styles/makeStyles';
 import { DataGrid } from '@mui/x-data-grid';
-import {useGet} from "restful-react";
 import Button from "@mui/material/Button";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Grid";
 import {documentDownload} from "../utility/DocumentDownload";
 import {useResidentContext} from "../context/residentContext";
 import {useAppContext} from "../context/state";
 import {ClaimModal} from "./ClaimModal";
+import {ExportModal} from "./ExportModal";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    width: '100%'
+  },
+  rowLayout: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center' // To be vertically aligned
+  },
+}));
 
 export default function ClaimsTable() {
 
@@ -24,7 +39,6 @@ export default function ClaimsTable() {
       .then(response => response.json())
       .then((data) =>  {
         setClaims(data['hydra:member']);
-
       });
   }, []);
 
@@ -82,7 +96,14 @@ export default function ClaimsTable() {
 
   return (
     <>
-      <ClaimModal />
+      <Container>
+        <Grid container>
+          <Grid container direction="row" justify="space-between" alignItems="center">
+            <ClaimModal />
+            <ExportModal />
+          </Grid>
+        </Grid>
+      </Container>
       <br/>
 
       <div style={{ height: 400, width: '100%' }}>
