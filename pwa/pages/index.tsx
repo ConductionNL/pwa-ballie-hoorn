@@ -38,7 +38,15 @@ const Welcome = () => (
             title="Waardepapieren"
             description="Waardepaieren zijn door de overheid uitgegeven bewijsstukken ten aanzien van door de overheid beheerde gegevens (zo als geboorte, overleiden, huwelijk en woonadress). Ze worden digitaal uitgegeven als pdf en voorzien van een QR code als echteheids kenmerk"
             link="/claims"
-            linkText="Lees meer "
+            linkText="Doorgaan "
+          />
+        </Grid>
+        <Grid item xs={12} sm={8} md={6}>
+          <PaperCard
+            title="Waardepapieren Export"
+            description="Waardepaieren zijn door de overheid uitgegeven bewijsstukken ten aanzien van door de overheid beheerde gegevens (zo als geboorte, overleiden, huwelijk en woonadress). Ze worden digitaal uitgegeven als pdf en voorzien van een QR code als echteheids kenmerk"
+            link="/claims/export"
+            linkText="Doorgaan "
           />
         </Grid>
       </Grid>

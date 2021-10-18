@@ -34,7 +34,7 @@ export function AppWrapper({ children }) {
       apiUrl: apiUrl,
       baseUrl: baseUrl,
       frontendUrl: frontendUrl,
-      brpUrl: 'https://conduction.demodam.nl/api/v1/brp'
+      brpUrl: brpUrl
     }
   }
 

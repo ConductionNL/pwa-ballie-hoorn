@@ -11,7 +11,7 @@ import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import {useResidentContext} from "../context/residentContext";
 
-export function ClaimModal() {
+export function ClaimModal(props) {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState('akte_van_geboorte');
 
@@ -20,7 +20,9 @@ export function ClaimModal() {
   };
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const context = useAppContext();
   const userContext = useUserContext();
@@ -29,12 +31,10 @@ export function ClaimModal() {
   const handleClaim = event => {
     event.preventDefault();
 
-    console.log('yes');
-
     let data = {
       organization: '001516814',
       type: type,
-      person: context.brpUrl + residentContext.resident['@id']
+      person: context.brpUrl + "/ingeschrevenpersonen/uuid/" + residentContext.resident['id']
     }
 
     fetch(context.apiUrl + '/gateways/service/certificates', {
@@ -45,6 +45,8 @@ export function ClaimModal() {
     })
       .then((response) => {
         if (response.ok) {
+          handleClose();
+          props.refreshTable();
           return response.json();
         } else {
           throw new Error('Something went wrong');
@@ -52,7 +54,6 @@ export function ClaimModal() {
       })
       .then((data) =>  {
         if (typeof window !== "undefined") {
-          console.log(data);
           handleClose();
         }
       }).catch((error) => {
@@ -63,7 +64,7 @@ export function ClaimModal() {
 
   return (
     <div>
-      <Button color="primary" onClick={handleOpen} sx={{width: "400px", marginBottom: "100px"}} type="button" variant="contained" >Aanmaken</Button>
+      <Button color="primary" onClick={handleOpen} sx={{width: "200px", marginBottom: "20px"}} type="button" variant="contained" >Aanmaken</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -91,7 +92,6 @@ export function ClaimModal() {
             <Typography id="transition-modal-title" variant="h5" mb={2} component="h2">
               Claim aanmaken
             </Typography>
-            <br/>
             <br/>
             <form onSubmit={handleClaim}>
               <FormControl fullWidth>

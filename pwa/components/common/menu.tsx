@@ -235,13 +235,11 @@ export default function MainMenu() {
               <Typography variant="h6" color="inherit">
                 {
                   userContext.user !== null &&
-                  <Link href="/user">
                   <span style={{color: 'white'}}>
                     {
                       userContext.user.name
                     }
                   </span>
-                  </Link>
                 }
 
               </Typography>
