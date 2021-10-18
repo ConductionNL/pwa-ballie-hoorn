@@ -25,6 +25,13 @@ function Index() {
   const userContext = useUserContext();
   const residentContext = useResidentContext();
   const title = 'Waardepapieren';
+  const router = useRouter();
+
+  useEffect(() => {
+    if (residentContext.resident == null) {
+      router.push('/claims');
+    }
+  }, []);
 
   return <>
     {
@@ -35,33 +42,35 @@ function Index() {
           <Layout title={title} description="waar kan ik deze description zien">
             <Grid container spacing={3}>
               <Grid item sm={12}>
-                <PageHeader title="Waardepapieren" crumbs={
-                  [
-                    {
-                      name: "waardepapieren"
-                    },
-                    {
-                      name: "inwoner selecteren",
-                      link: "/claims"
-                    },
-                    {
-                      name: residentContext.resident.naam.aanschrijfwijze
-                    },
-                    {
-                      name: "waardepapieren"
+                {
+                  residentContext.resident !== null &&
+                  <>
+                    <PageHeader title="Waardepapieren" crumbs={
+                      [
+                        {
+                          name: "waardepapieren"
+                        },
+                        {
+                          name: "inwoner selecteren",
+                          link: "/claims"
+                        },
+                        {
+                          name: residentContext.resident.naam.aanschrijfwijze
+                        },
+                        {
+                          name: "waardepapieren"
+                        }
+                      ]
                     }
-                  ]
+                    />
+                    <Typography>
+                      In deze tabel staan de huidige waardepapieren van {residentContext.resident.naam.aanschrijfwijze}
+                    </Typography>
+                    <br/>
+                    <br/>
+                    <ClaimsTable />
+                  </>
                 }
-                />
-
-
-                <Typography>
-                  In deze tabel staan de huidige waardepapieren van {residentContext.resident.naam.aanschrijfwijze}
-                </Typography>
-                <br/>
-                <br/>
-                <ClaimsTable />
-
               </Grid>
             </Grid>
           </Layout>

@@ -31,12 +31,10 @@ export function ClaimModal() {
   const handleClaim = event => {
     event.preventDefault();
 
-    console.log('yes');
-
     let data = {
       organization: '001516814',
       type: type,
-      person: context.brpUrl + residentContext.resident['@id']
+      person: context.brpUrl + "/ingeschrevenpersonen/uuid/" + residentContext.resident['id']
     }
 
     fetch(context.apiUrl + '/gateways/service/certificates', {

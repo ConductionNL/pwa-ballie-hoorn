@@ -2,13 +2,12 @@ import React, {useEffect} from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Grid";
 import {documentDownload} from "../utility/DocumentDownload";
 import {useResidentContext} from "../context/residentContext";
 import {useAppContext} from "../context/state";
 import {ClaimModal} from "./ClaimModal";
 import {ExportModal} from "./ExportModal";
+import {Container, Grid} from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -98,9 +97,8 @@ export default function ClaimsTable() {
     <>
       <Container>
         <Grid container>
-          <Grid container direction="row" justify="space-between" alignItems="center">
+          <Grid >
             <ClaimModal />
-            <ExportModal />
           </Grid>
         </Grid>
       </Container>

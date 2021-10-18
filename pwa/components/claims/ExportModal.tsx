@@ -108,7 +108,6 @@ export function ExportModal() {
               <InputLabel id="demo-simple-select-label">Start datum</InputLabel>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker
-                  maxDate={new Date()}
                   displayStaticWrapperAs="desktop"
                   openTo="day"
                   value={new Date()}
@@ -122,8 +121,6 @@ export function ExportModal() {
               <InputLabel id="demo-simple-select-label">Eind datum</InputLabel>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <StaticDatePicker
-                  minDate={startDate}
-                  maxDate={new Date()}
                   displayStaticWrapperAs="desktop"
                   openTo="day"
                   value={new Date()}
