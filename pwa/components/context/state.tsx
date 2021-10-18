@@ -25,7 +25,7 @@ export function AppWrapper({ children }) {
       apiUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api';
       baseUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
       frontendUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
-      brpUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api/v1/brp'
+      brpUrl = 'http://brpservice.waardepapieren.svc.cluster.local'
     }
 
 
