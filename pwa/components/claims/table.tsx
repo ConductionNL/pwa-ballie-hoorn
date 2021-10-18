@@ -31,7 +31,7 @@ export default function ClaimsTable() {
 
   const refreshTable = () => {
     setClaims(null);
-    fetch(context.apiUrl + "/gateways/register/certificates?person=" + residentContext.resident['@id'], {
+    fetch(context.apiUrl + "/gateways/register/certificates?person=" + context.brpUrl + "/ingeschrevenpersonen/" + residentContext.resident['burgerservicenummer'], {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

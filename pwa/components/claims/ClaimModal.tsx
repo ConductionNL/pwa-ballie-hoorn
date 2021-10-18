@@ -34,7 +34,7 @@ export function ClaimModal(props) {
     let data = {
       organization: '001516814',
       type: type,
-      person: context.brpUrl + "/ingeschrevenpersonen/uuid/" + residentContext.resident['id']
+      person: context.brpUrl + "/ingeschrevenpersonen/" + residentContext.resident['burgerservicenummer']
     }
 
     fetch(context.apiUrl + '/gateways/service/certificates', {
