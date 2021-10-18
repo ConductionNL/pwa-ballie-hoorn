@@ -9,18 +9,6 @@ import {ClaimModal} from "./ClaimModal";
 import {ExportModal} from "./ExportModal";
 import {Container, Grid} from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%'
-  },
-  rowLayout: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center' // To be vertically aligned
-  },
-}));
-
 export default function ClaimsTable() {
 
   const [claims, setClaims] = React.useState(null);
@@ -41,6 +29,21 @@ export default function ClaimsTable() {
       });
   }, []);
 
+  const refreshTable = () => {
+    setClaims(null);
+    fetch(context.apiUrl + "/gateways/register/certificates?person=" + residentContext.resident['@id'], {
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
+      },
+    })
+      .then(response => response.json())
+      .then((data) =>  {
+        setClaims(data['hydra:member']);
+      });
+  }
+
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, hide: true },
     {
@@ -49,8 +52,8 @@ export default function ClaimsTable() {
       flex: 1,
     },
     {
-      field: 'organization',
-      headerName: 'Organisatie',
+      field: 'dateCreated',
+      headerName: 'Aangemaakt op',
       flex: 1,
     },
     {
@@ -95,14 +98,7 @@ export default function ClaimsTable() {
 
   return (
     <>
-      <Container>
-        <Grid container>
-          <Grid >
-            <ClaimModal />
-          </Grid>
-        </Grid>
-      </Container>
-      <br/>
+      <ClaimModal refreshTable={refreshTable} />
 
       <div style={{ height: 400, width: '100%' }}>
         { claims !== null ? (
@@ -111,7 +107,6 @@ export default function ClaimsTable() {
               columns={columns}
               pageSize={100}
               rowsPerPageOptions={[100]}
-              checkboxSelection
               disableSelectionOnClick
             />
           )
@@ -123,7 +118,6 @@ export default function ClaimsTable() {
               columns={columns}
               pageSize={100}
               rowsPerPageOptions={[100]}
-              checkboxSelection
               disableSelectionOnClick
             />
           )

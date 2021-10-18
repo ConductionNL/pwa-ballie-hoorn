@@ -11,7 +11,7 @@ import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import {useResidentContext} from "../context/residentContext";
 
-export function ClaimModal() {
+export function ClaimModal(props) {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState('akte_van_geboorte');
 
@@ -46,7 +46,7 @@ export function ClaimModal() {
       .then((response) => {
         if (response.ok) {
           handleClose();
-          window.location.reload(); // TODO: do something else to refresh the table, not the page!
+          props.refreshTable();
           return response.json();
         } else {
           throw new Error('Something went wrong');
@@ -54,7 +54,6 @@ export function ClaimModal() {
       })
       .then((data) =>  {
         if (typeof window !== "undefined") {
-          console.log(data);
           handleClose();
         }
       }).catch((error) => {
@@ -65,7 +64,7 @@ export function ClaimModal() {
 
   return (
     <div>
-      <Button color="primary" onClick={handleOpen} sx={{width: "400px", marginBottom: "100px"}} type="button" variant="contained" >Aanmaken</Button>
+      <Button color="primary" onClick={handleOpen} sx={{width: "200px", marginBottom: "20px"}} type="button" variant="contained" >Aanmaken</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

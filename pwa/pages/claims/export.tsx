@@ -29,7 +29,7 @@ function Index() {
   const context = useAppContext();
   const title = 'Waardepapieren';
 
-  const [fileType, setFileType] = React.useState('text/csv');
+  const [fileType, setFileType] = React.useState('csv');
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
 
@@ -45,6 +45,8 @@ function Index() {
 
   const handleExport = event => {
     event.preventDefault();
+    console.log(context.apiUrl + "/gateways/register/certificates." + fileType +"?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0]);
+    return;
     fetch(context.apiUrl + "/gateways/register/certificates?&dateCreated[after]=" + startDate.toISOString().split('T')[0] + '&dateCreated[before]=' + endDate.toISOString().split('T')[0], {
       credentials: 'include',
       headers: {
@@ -96,7 +98,7 @@ function Index() {
                       label="Bestand Type"
                       onChange={handleFileTypeChange}
                     >
-                      <MenuItem value="text/csv">csv</MenuItem>
+                      <MenuItem value="csv">csv</MenuItem>
                     </Select>
                   </FormControl>
                   <br/>
