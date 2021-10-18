@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import ActionMenu from 'components/common/actionmenu';
 import { RestfulProvider } from "restful-react";
@@ -28,7 +28,7 @@ const handleLogin = () => {
 
 const Welcome = () => (
   <>
-    <Layout title="Welkom op Open-Inwoner!" description="waar kan ik deze description zien">
+    <Layout title="Waardepapieren ballie interface" description="waar kan ik deze description zien">
       {
         handleLogin()
       }
@@ -36,9 +36,17 @@ const Welcome = () => (
         <Grid item xs={12} sm={8} md={6}>
           <PaperCard
             title="Waardepapieren"
-            description="De Tijdelijke Ondersteuning Noodzakelijke Kosten (TONK) is een tijdelijke eenmalige financiële ondersteuning voor als u een aanzienlijke inkomensterugval heeft als gevolg van de coronamaatregelen. En als u hierdoor problemen heeft met het betalen van uw woonkosten. Het gaat dan om de huur of hypotheek en de kosten van elektriciteit, gas en water en eventuele servicekosten."
-            link="/products/products"
-            linkText="Lees meer "
+            description="Waardepaieren zijn door de overheid uitgegeven bewijsstukken ten aanzien van door de overheid beheerde gegevens (zo als geboorte, overleiden, huwelijk en woonadress). Ze worden digitaal uitgegeven als pdf en voorzien van een QR code als echteheids kenmerk"
+            link="/claims"
+            linkText="Doorgaan "
+          />
+        </Grid>
+        <Grid item xs={12} sm={8} md={6}>
+          <PaperCard
+            title="Waardepapieren Export"
+            description="Waardepaieren zijn door de overheid uitgegeven bewijsstukken ten aanzien van door de overheid beheerde gegevens (zo als geboorte, overleiden, huwelijk en woonadress). Ze worden digitaal uitgegeven als pdf en voorzien van een QR code als echteheids kenmerk"
+            link="/claims/export"
+            linkText="Doorgaan "
           />
         </Grid>
       </Grid>
