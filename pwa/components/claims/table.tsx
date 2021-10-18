@@ -50,11 +50,20 @@ export default function ClaimsTable() {
       field: 'type',
       headerName: 'Type',
       flex: 1,
+      valueFormatter: (params) => {
+        const valueFormatted = params.value.replaceAll('_', ' ');
+        return `${valueFormatted}`;
+      },
     },
     {
       field: 'dateCreated',
       headerName: 'Aangemaakt op',
       flex: 1,
+      valueFormatter: (params) => {
+        let valueFormatted = new Date(params.value);
+        valueFormatted = valueFormatted.toLocaleString("en-GB");
+        return `${valueFormatted}`;
+      },
     },
     {
       field: "Pdf",
