@@ -4,40 +4,13 @@ const AppContext = createContext(undefined);
 
 export function AppWrapper({ children }) {
 
-  let sharedState = {};
-  let meUrl;
-  let apiUrl;
-  let baseUrl;
-  let frontendUrl;
-  let brpUrl;
-
-  if (typeof window !== 'undefined') {
-    if (window.location.href.includes('http://localhost')) {
-      meUrl = 'http://localhost/me';
-      apiUrl = 'http://localhost/api';
-      baseUrl = 'http://localhost';
-      frontendUrl = 'http://localhost:3000';
-      brpUrl = 'https://conduction.demodam.nl/api/v1/brp'
-    }
-    else
-    {
-      meUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api/users/me';
-      apiUrl = 'https://acc-waardepapieren-balie.hoorn.nl/api';
-      baseUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
-      frontendUrl = 'https://acc-waardepapieren-balie.hoorn.nl/';
-      brpUrl = 'http://brpservice.waardepapieren.svc.cluster.local'
-    }
-
-
-    sharedState = {
-      meUrl: meUrl,
-      apiUrl: apiUrl,
-      baseUrl: baseUrl,
-      frontendUrl: frontendUrl,
-      brpUrl: brpUrl
-    }
+  let sharedState = {
+    meUrl: process.env.NEXT_PUBLIC_ME_URL !== undefined ? process.env.NEXT_PUBLIC_ME_URL : 'http://localhost/me',
+    apiUrl: process.env.NEXT_PUBLIC_API_URL !== undefined ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost/api',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL !== undefined ? process.env.NEXT_PUBLIC_BASE_URL : 'http://localhost',
+    frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL !== undefined ? process.env.NEXT_PUBLIC_FRONTEND_URL : 'http://localhost:3000',
+    brpUrl: process.env.NEXT_PUBLIC_BRP_URL !== undefined ? process.env.NEXT_PUBLIC_BRP_URL : 'http://brpservice.waardepapieren.svc.cluster.local',
   }
-
 
   return (
     <AppContext.Provider value={sharedState}>
