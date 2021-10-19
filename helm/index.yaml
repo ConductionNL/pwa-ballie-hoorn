@@ -3,7 +3,7 @@ entries:
   commonground-gateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-10-18T18:03:42.14743312+02:00"
+    created: "2021-10-19T09:31:15.8621304+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -23,7 +23,7 @@ entries:
   pwa-balie-horn:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-10-18T18:03:42.108208013+02:00"
+    created: "2021-10-19T09:31:15.8501295+02:00"
     dependencies:
     - alias: gateway
       condition: gateway.enabled
@@ -31,10 +31,10 @@ entries:
       repository: https://raw.githubusercontent.com/ConductionNL/commonground-gateway/master/api/helm/
       version: 0.1.2
     description: A Helm chart for the Balie PWA of Hoorn
-    digest: 22d5bfdaa09ac2dcc4758c5d6431c4c80fda3b2631be26e8b29a2e54ac561741
+    digest: 2c24a4b5c6be433d8e020e7ec681f10081dc31efea926f3cb1e68bbc18f71ec7
     name: pwa-balie-horn
     type: application
     urls:
     - pwa-balie-horn-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-18T18:03:42.073294803+02:00"
+generated: "2021-10-19T09:31:15.8371296+02:00"
